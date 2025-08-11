@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Jersey 10';
+    src: url('Jersey10-Regular.woff2') format('woff2'),
+        url('Jersey10-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
