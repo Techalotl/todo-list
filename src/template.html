@@ -41,9 +41,26 @@
                 <textarea name="notes" id="notes"></textarea>
             </div>
             <div class="form-row">
-              <button id="cancelTask" type="reset">Cancel</button>
-              <button id="confirmTask" type="submit">Confirm</button>
+              <button id="cancel-task" type="reset">Cancel</button>
+              <button id="confirm-task" type="submit">Confirm</button>
             </div>
+          </div>
+        </form>
+      </dialog>
+      <dialog id="project-dialog" aria-labelledby="project-dialog-title">
+        <h2 id="project-dialog-title">New Project</h2>
+        <form method="dialog" id="project-form">
+          <div class="form-row">
+            <label for="project-title">Title:</label>
+            <input type="text" name="project-title" id="project-title">
+        </div>
+        <div class="form-row">
+          <label for="project-description">Description:</label>
+          <input type="text" name="project-description" id="project-description">
+      </div>
+          <div class="form-row">
+            <button id="cancel-project" type="reset">Cancel</button>
+            <button id="confirm-project" type="submit">Confirm</button>
           </div>
         </form>
       </dialog>
