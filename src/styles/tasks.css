@@ -62,7 +62,8 @@ input[type="checkbox"]:checked:before {
 }
 
 .notes,
-p {
+p,
+.description {
     font-family: monospace;
     overflow: auto;
     overflow-wrap: break-word;

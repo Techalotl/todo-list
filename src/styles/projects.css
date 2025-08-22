@@ -1,0 +1,42 @@
+.project-container {
+    border: 2px solid #264c00;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.project-title-container {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2rem;
+}
+
+.project-name-container {
+    display: flex;
+    gap: 10px;
+}
+
+.project-container h3 {
+    font-size: 1.8rem;
+}
+
+.arrow-button {
+    background-image: url(../assets/arrowRight.svg);
+    border: none;
+}
+
+.arrow-button:hover {
+    background-color: transparent;
+}
+
+.project-description {
+    font-size: 0.9rem;
+    font-family: monospace;
+    overflow: auto;
+    overflow-wrap: break-word;
+}

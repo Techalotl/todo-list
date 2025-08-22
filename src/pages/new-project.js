@@ -1,0 +1,93 @@
+import { addProjectToSelect, printProject } from "./projects";
+import { tasks } from "./new-task";
+import { printTask } from "./tasks";
+
+export const projects = [];
+const mainContainer = document.querySelector('#main-container');
+
+class Project {
+    constructor (title, description, done) {
+        this.title = title;
+        this.description = description;
+        this.done = done;
+    }
+    projectCompleted () {
+      this.done === false ? this.done = true : this.done = false;
+    }
+}
+
+export function openProjectDialog () {
+  const projectDialog = document.querySelector('#project-dialog');
+  const cancelButton = document.querySelector('#cancel-project');
+  const confirmProject = document.querySelector('#confirm-project');
+  projectDialog.showModal();
+  cancelButton.addEventListener('click', () => {
+    projectDialog.close();
+  });
+  confirmProject.addEventListener('click', () => {
+    checkForm();
+    printProject();
+    const projectForm = document.querySelector('#project-form');
+    projectForm.reset();
+  })
+}
+
+function checkForm () {
+    const projectTitle = document.querySelector('#project-title');
+    const projectDescription = document.querySelector('#project-description');
+    if (projectTitle.value === '' && projectDescription.value === '') {
+      return
+    } else {
+      const project = new Project(projectTitle.value || 'Untitled Project',
+        projectDescription.value, false);
+      projects.push(project);
+      addProjectToSelect();
+    }
+}
+
+const defaultProject = new Project ('','', true);
+projects.push(defaultProject);
+
+mainContainer.addEventListener('click', (e) => {
+  if (e.target.classList[0] === 'project-trash-icon') {
+    const project = projects[e.target.classList[1]].title;
+    deleteAllTasks(project);
+    projects.splice(e.target.classList[1], 1);
+    printProject();
+  }
+})
+
+mainContainer.addEventListener('click', (e) => {
+  if(e.target.name === 'project-done') {
+      if (e.target.checked) {
+          projects[e.target.className].projectCompleted();
+          printProject();
+      } else {
+          projects[e.target.className].projectCompleted();
+          printProject();
+      }
+  }
+})
+
+mainContainer.addEventListener('click', (e) => {
+  if (e.target.classList[0] === 'arrow-button') {
+    console.log(projects[`${e.target.classList[1]}`]);
+    printTask(projects[`${e.target.classList[1]}`].title);
+  }
+})
+
+export function tasksPerProject (projectName) {
+  const tasksInProject = tasks.filter(task => task.toProject === projectName);
+  return tasksInProject.length;
+}
+
+function deleteAllTasks (project) {
+  //NO SNEAKY TASKS HERE! Nothing survives. It's the only way I could think of.
+  for (let i = 0; i < tasks.length; i++) {
+    for (let j = 0; j < tasks.length; j++) {
+      if (tasks[j].toProject === project) {
+        tasks.splice(j,1);
+      }
+    }
+  }
+}

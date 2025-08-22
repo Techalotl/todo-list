@@ -1,5 +1,3 @@
-// import './styles/styles.css'
-// import './pages/tasks.js'
 import { openTaskDialog } from './pages/new-task.js';
 import { openProjectDialog } from './pages/new-project.js';
 import { printProject } from './pages/projects.js';
@@ -17,7 +15,6 @@ newTask.addEventListener('click', () => {
 });
 
 newProject.addEventListener('click', () => {
-    console.log('New Project clicked');
     openProjectDialog();
 });
 
@@ -31,12 +28,10 @@ thisWeek.addEventListener('click', () => {
 
 projectsButton.addEventListener('click', () => {
     printProject();
-    console.log('Projects clicked');
 });
 
 tasksButton.addEventListener('click', () => {
     printTask();
-    console.log('Tasks clicked');
 });
 
 printTask();
