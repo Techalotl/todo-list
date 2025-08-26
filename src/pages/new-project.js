@@ -48,6 +48,7 @@ function checkForm () {
 const defaultProject = new Project ('','', true);
 projects.push(defaultProject);
 
+//Deletes project
 mainContainer.addEventListener('click', (e) => {
   if (e.target.classList[0] === 'project-trash-icon') {
     const project = projects[e.target.classList[1]].title;
@@ -57,6 +58,7 @@ mainContainer.addEventListener('click', (e) => {
   }
 })
 
+//Marks project as done
 mainContainer.addEventListener('click', (e) => {
   if(e.target.name === 'project-done') {
       if (e.target.checked) {
@@ -69,9 +71,9 @@ mainContainer.addEventListener('click', (e) => {
   }
 })
 
+//Shows tasks in a project
 mainContainer.addEventListener('click', (e) => {
   if (e.target.classList[0] === 'arrow-button') {
-    console.log(projects[`${e.target.classList[1]}`]);
     printTask(projects[`${e.target.classList[1]}`].title);
   }
 })
@@ -82,7 +84,7 @@ export function tasksPerProject (projectName) {
 }
 
 function deleteAllTasks (project) {
-  //NO SNEAKY TASKS HERE! Nothing survives. It's the only way I could think of.
+  //NO SNEAKY TASKS HERE! It's the only way I could think of.
   for (let i = 0; i < tasks.length; i++) {
     for (let j = 0; j < tasks.length; j++) {
       if (tasks[j].toProject === project) {

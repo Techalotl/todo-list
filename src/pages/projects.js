@@ -1,6 +1,5 @@
 import '../styles/projects.css';
 import { projects, tasksPerProject } from "./new-project";
-import edit from '../assets/edit.svg';
 import trash from '../assets/trash.svg';
 import trash1 from '../assets/trash1.svg';
 
@@ -42,11 +41,6 @@ export function printProject () {
         checkProject.setAttribute('name', 'project-done');
         checkProject.setAttribute('class',`${i}`)
         projectIcons.appendChild(checkProject);
-        const editIcon = document.createElement('img');
-        editIcon.setAttribute('class', `edit-icon ${i}`);
-        editIcon.src = edit;
-        editIcon.alt = 'Icon for edit the content';
-        projectIcons.appendChild(editIcon);
         const deleteProjectIcon = document.createElement('img');
         deleteProjectIcon.setAttribute('class', `project-trash-icon ${i}`);
         deleteProjectIcon.src = trash;
@@ -56,7 +50,6 @@ export function printProject () {
             checkProject.checked = true;
             projectDiv.style.backgroundColor = '#264c00';
             projectName.style.color = '#939e01';
-            editIcon.style.display = 'none';
             arrowRight.style.display = 'none';
             deleteProjectIcon.src = trash1;
         }
