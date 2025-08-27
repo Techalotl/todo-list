@@ -1,5 +1,6 @@
 import { openTaskDialog } from './pages/new-task.js';
 import { openProjectDialog } from './pages/new-project.js';
+import { printTaskByDate } from './pages/today.js';
 import { printProject } from './pages/projects.js';
 import { printTask } from './pages/tasks.js';
 
@@ -19,7 +20,7 @@ newProject.addEventListener('click', () => {
 });
 
 todayButton.addEventListener('click', () => {
-    console.log('Today clicked');
+    printTaskByDate();
 });
 
 thisWeek.addEventListener('click', () => {

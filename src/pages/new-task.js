@@ -4,7 +4,9 @@ import { printProject } from './projects';
 
 export const tasks = [];
 const today = new Date();
-const currentDay = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
+const currentDay = `${today.getFullYear()},${today.getMonth()+1},${today.getDate()}`;
+const { lightFormat } = require('date-fns');
+export const currentDayFormat = lightFormat(new Date (currentDay), 'yyyy-MM-dd');
 const mainContainer = document.querySelector('#main-container');
 
 class Task {
@@ -22,8 +24,8 @@ class Task {
   }
 }
 
-const example1 = new Task ('Read email', 'So I can clean my inbox', currentDay, '#3', 'Let us stop procrastinating this, please.', '', false);
-const example2 = new Task ('Take Sparks to the vet', 'What the title says', currentDay, '#1', 'He needs his last vaccine. Also remember to ask about the weird turd he produce.', '', false);
+const example1 = new Task ('Read email', 'So I can clean my inbox', currentDayFormat, '#3', 'Let us stop procrastinating this, please.', '', false);
+const example2 = new Task ('Take Sparks to the vet', 'What the title says', currentDayFormat, '#1', 'He needs his last vaccine. Also remember to ask about the weird turd he produce.', '', false);
 const example3 = new Task ('Call Simon', 'Need to confirm his assistance', '2026-02-01','#2', '', '', true);
 tasks.push(example1, example2, example3);
 
@@ -48,7 +50,7 @@ export function openTaskDialog () {
       return
     } else {
       const task = new Task (taskTitle.value || 'Untitled task', taskDescription.value,
-        taskDate.value || currentDay, taskPriority.value, taskNotes.value, taskProject.value, false
+        taskDate.value || currentDayFormat, taskPriority.value, taskNotes.value, taskProject.value, false
       )
       tasks.push(task);
       if (taskProject.value === '') {
@@ -63,6 +65,7 @@ export function openTaskDialog () {
   })
 }
 
+//Delete task
 mainContainer.addEventListener('click', (e) => {
   if (e.target.classList[0] === 'trash-icon') {
     const project = tasks[e.target.classList[1]].toProject;
