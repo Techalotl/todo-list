@@ -14,19 +14,19 @@ export function printTask (project = '') {
         if (tasks[i].toProject === project) {
             const taskDiv = document.createElement('div');
             taskDiv.setAttribute('class', 'task-div');
-            taskDiv.setAttribute('id', `task-div-${i}`)
+            taskDiv.setAttribute('id', `task-div-${i}`);
             mainContainer.appendChild(taskDiv);
             const taskDivTop = document.createElement('div');
             taskDivTop.setAttribute('class', 'task-div-top');
             taskDiv.appendChild(taskDivTop);
             const titleDiv = document.createElement('div');
-            titleDiv.setAttribute('class', 'title-container')
+            titleDiv.setAttribute('class', 'title-container');
             taskDivTop.appendChild(titleDiv);
             const taskNameContainer = document.createElement('div');
-            taskNameContainer.setAttribute('class', 'task-name-container')
+            taskNameContainer.setAttribute('class', 'task-name-container');
             titleDiv.appendChild(taskNameContainer);
             const taskName = document.createElement('h3');
-            taskName.setAttribute('id', `task-name-${i}`)
+            taskName.setAttribute('id', `task-name-${i}`);
             taskName.innerText = tasks[i].title;
             taskNameContainer.appendChild(taskName);
             const arrowDown = document.createElement('img');
@@ -45,7 +45,7 @@ export function printTask (project = '') {
             const checkTask = document.createElement('input');
             checkTask.setAttribute('type', 'checkbox');
             checkTask.setAttribute('name', 'task-done');
-            checkTask.setAttribute('id',`${i}`)
+            checkTask.setAttribute('id',`${i}`);
             icons.appendChild(checkTask);
             const editIcon = document.createElement('img');
             editIcon.setAttribute('class', `edit-icon ${i}`);
@@ -97,6 +97,7 @@ export function printTask (project = '') {
     }
 }
 
+//Mark task as done
 mainContainer.addEventListener('click', (e) => {
     const taskDiv = document.querySelector(`#task-div-${e.target.id}`);
     const taskName = document.querySelector(`#task-name-${e.target.id}`);
@@ -122,6 +123,7 @@ mainContainer.addEventListener('click', (e) => {
     }
 })
 
+//Expand task
 mainContainer.addEventListener('click', (e) => {
     if (e.target.classList[0] === 'arrow-icon') {
         const arrow = document.getElementById(`${e.target.id}`);
