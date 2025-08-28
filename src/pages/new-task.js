@@ -3,10 +3,11 @@ import { printTask } from './tasks';
 import { printProject } from './projects';
 
 export const tasks = [];
-const today = new Date();
-const currentDay = `${today.getFullYear()},${today.getMonth()+1},${today.getDate()}`;
 const { lightFormat } = require('date-fns');
-export const currentDayFormat = lightFormat(new Date (currentDay), 'yyyy-MM-dd');
+export const todayDate = lightFormat(new Date (), 'yyyy-MM-dd');
+const { addDays } = require("date-fns");
+const tomorrowDate = lightFormat(new Date (addDays(new Date (), 1)), 'yyyy-MM-dd');
+const nextWeek = lightFormat(new Date (addDays(new Date (), 7)), 'yyyy-MM-dd');
 const mainContainer = document.querySelector('#main-container');
 
 class Task {
@@ -24,9 +25,9 @@ class Task {
   }
 }
 
-const example1 = new Task ('Read email', 'So I can clean my inbox', currentDayFormat, '#3', 'Let us stop procrastinating this, please.', '', false);
-const example2 = new Task ('Take Sparks to the vet', 'What the title says', currentDayFormat, '#1', 'He needs his last vaccine. Also remember to ask about the weird turd he produce.', '', false);
-const example3 = new Task ('Call Simon', 'Need to confirm his assistance', '2026-02-01','#2', '', '', true);
+const example1 = new Task ('Read email', 'So I can clean my inbox', todayDate, '#3', 'Let us stop procrastinating this, please.', '', false);
+const example2 = new Task ('Take Sparks to the vet', 'What the title says', tomorrowDate, '#1', 'He needs his last vaccine. Also remember to ask about the weird turd he produce.', '', false);
+const example3 = new Task ('Call Simon', 'Need to confirm his assistance', nextWeek,'#2', '', '', true);
 tasks.push(example1, example2, example3);
 
 export function openTaskDialog () {
@@ -50,7 +51,7 @@ export function openTaskDialog () {
       return
     } else {
       const task = new Task (taskTitle.value || 'Untitled task', taskDescription.value,
-        taskDate.value || currentDayFormat, taskPriority.value, taskNotes.value, taskProject.value, false
+        taskDate.value || todayDate, taskPriority.value, taskNotes.value, taskProject.value, false
       )
       tasks.push(task);
       if (taskProject.value === '') {
