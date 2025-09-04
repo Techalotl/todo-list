@@ -1,4 +1,4 @@
-import { tasks, currentDayFormat } from "./new-task";
+import { tasks, todayDate } from "./new-task";
 import arrowD from '../assets/arrowDown.svg';
 import edit from '../assets/edit.svg';
 import trash from '../assets/trash.svg';
@@ -6,10 +6,10 @@ import trash1 from '../assets/trash1.svg';
 
 const mainContainer = document.querySelector('#main-container');
 
-export function printTaskByDate (day = currentDayFormat) {
+export function printTodayTasks () {
     mainContainer.innerHTML = '';
     for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i].date === day) {
+        if (tasks[i].date === todayDate) {
             const taskDiv = document.createElement('div');
             taskDiv.setAttribute('class', 'task-div');
             taskDiv.setAttribute('id', `task-div-${i}`);
