@@ -1,6 +1,7 @@
 import '../styles/styles.css';
 import { printTask } from './tasks';
-import { printProject } from './projects';
+import { printProject, addProjectToSelect } from './projects';
+import { printTodayTasks } from './today';
 
 export const tasks = [];
 const { lightFormat } = require('date-fns');
@@ -77,3 +78,67 @@ mainContainer.addEventListener('click', (e) => {
     printTask(project);
   }
 })
+
+//Edit task
+mainContainer.addEventListener('click', (e) => {
+  if (e.target.classList[0] === 'edit-icon') {
+    const target = e.target.classList[1];
+    const taskDialog = document.querySelector('#edit-task-dialog');
+    const cancelButton = document.querySelector('#edit-cancel-task');
+    const confirmButton = document.querySelector('#edit-confirm-task');
+    addProjectToSelect('#edit-project');
+    fillEditDialog(target);
+    taskDialog.showModal();
+    cancelButton.onclick = () => {
+      taskDialog.close();
+    }
+    confirmButton.onclick = () => {
+      checkTaskEdits(target);
+    }
+  }
+  
+})
+
+function fillEditDialog (target) {
+  const taskTitle = document.querySelector('#edit-title');
+  const taskDescription = document.querySelector('#edit-description');
+  const taskDate = document.querySelector('#edit-due-date');
+  const taskPriority = document.querySelector('#edit-priority');
+  const taskNotes = document.querySelector('#edit-notes');
+  const taskProject = document.querySelector('#edit-project');
+  taskTitle.value = tasks[target].title;
+  taskDescription.value = tasks[target].description;
+  taskDate.value = tasks[target].date;
+  taskPriority.value = tasks[target].priority;
+  taskNotes.value = tasks[target].notes;
+  taskProject.value = tasks[target].toProject;
+}
+
+function checkTaskEdits (target) {
+  const taskTitle = document.querySelector('#edit-title');
+  const taskDescription = document.querySelector('#edit-description');
+  const taskDate = document.querySelector('#edit-due-date');
+  const taskPriority = document.querySelector('#edit-priority');
+  const taskNotes = document.querySelector('#edit-notes');
+  const taskProject = document.querySelector('#edit-project');
+  if (taskTitle.value === '' && taskDescription.value === '' && taskDate.value === '') {
+    return
+  } else if (tasks[target].title != taskTitle.value ||
+    tasks[target].description != taskDescription.value ||
+    tasks[target].date != taskDate.value ||
+    tasks[target].priority != taskPriority.value ||
+    tasks[target].notes != taskNotes.value ||
+    tasks[target].toProject != taskProject.value) {
+      tasks[target].title = taskTitle.value || 'Untitled task';
+      tasks[target].description = taskDescription.value;
+      tasks[target].date = taskDate.value || todayDate;
+      tasks[target].priority = taskPriority.value;
+      tasks[target].notes = taskNotes.value;
+      tasks[target].toProject = taskProject.value;
+      if (taskProject.value === '') {
+        printTask();
+      } else if (taskDate.value === todayDate) {
+        printTodayTasks();
+      } else { printTask(taskProject.value); }
+  }
+}
