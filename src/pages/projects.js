@@ -56,8 +56,8 @@ export function printProject () {
     }
 }
 
-export function addProjectToSelect () {
-    const projectOptions = document.querySelector('#project');
+export function addProjectToSelect (idSelector) {
+    const projectOptions = document.querySelector(idSelector);
     projectOptions.textContent = '';
     for (let i = 0; i < projects.length; i++) {
         const option = document.createElement('option');

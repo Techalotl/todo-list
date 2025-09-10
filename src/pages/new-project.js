@@ -41,7 +41,7 @@ function checkForm () {
       const project = new Project(projectTitle.value || 'Untitled Project',
         projectDescription.value, false);
       projects.push(project);
-      addProjectToSelect();
+      addProjectToSelect('#project');
     }
 }
 
