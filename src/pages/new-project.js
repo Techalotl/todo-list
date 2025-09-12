@@ -6,14 +6,14 @@ export const projects = [];
 const mainContainer = document.querySelector('#main-container');
 
 class Project {
-    constructor (title, description, done) {
-        this.title = title;
-        this.description = description;
-        this.done = done;
-    }
-    projectCompleted () {
-      this.done === false ? this.done = true : this.done = false;
-    }
+  constructor (title, description, done) {
+    this.title = title;
+    this.description = description;
+    this.done = done;
+  }
+  projectCompleted () {
+    this.done === false ? this.done = true : this.done = false;
+  }
 }
 
 export function openProjectDialog () {
@@ -26,23 +26,26 @@ export function openProjectDialog () {
   });
   confirmProject.addEventListener('click', () => {
     checkForm();
-    printProject();
     const projectForm = document.querySelector('#project-form');
     projectForm.reset();
   })
 }
 
 function checkForm () {
-    const projectTitle = document.querySelector('#project-title');
-    const projectDescription = document.querySelector('#project-description');
-    if (projectTitle.value === '' && projectDescription.value === '') {
-      return
-    } else {
-      const project = new Project(projectTitle.value || 'Untitled Project',
-        projectDescription.value, false);
-      projects.push(project);
-      addProjectToSelect('#project');
-    }
+  const projectTitle = document.querySelector('#project-title');
+  const projectDescription = document.querySelector('#project-description');
+  if (projectTitle.value === '' && projectDescription.value === '') {
+    return
+  } else {
+    addNewProject(projectTitle.value || 'Untitled Project', projectDescription.value, false);
+    printProject();
+    addProjectToSelect('#project');
+  }
+}
+
+function addNewProject (title, description, done) {
+  const project = new Project(title, description, done);
+  projects.push(project);
 }
 
 const defaultProject = new Project ('','', true);
@@ -61,13 +64,13 @@ mainContainer.addEventListener('click', (e) => {
 //Marks project as done
 mainContainer.addEventListener('click', (e) => {
   if(e.target.name === 'project-done') {
-      if (e.target.checked) {
-          projects[e.target.className].projectCompleted();
-          printProject();
-      } else {
-          projects[e.target.className].projectCompleted();
-          printProject();
-      }
+    if (e.target.checked) {
+        projects[e.target.className].projectCompleted();
+        printProject();
+    } else {
+        projects[e.target.className].projectCompleted();
+        printProject();
+    }
   }
 })
 
