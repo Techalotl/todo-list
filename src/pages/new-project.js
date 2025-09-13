@@ -40,6 +40,7 @@ function checkForm () {
     addNewProject(projectTitle.value || 'Untitled Project', projectDescription.value, false);
     printProject();
     addProjectToSelect('#project');
+    localStorage.setItem('localProjects', JSON.stringify(projects));
   }
 }
 
@@ -58,6 +59,8 @@ mainContainer.addEventListener('click', (e) => {
     deleteAllTasks(project);
     projects.splice(e.target.classList[1], 1);
     printProject();
+    localStorage.clear();
+    localStorage.setItem('localProjects', JSON.stringify(projects));
   }
 })
 
@@ -67,9 +70,13 @@ mainContainer.addEventListener('click', (e) => {
     if (e.target.checked) {
         projects[e.target.className].projectCompleted();
         printProject();
+        localStorage.clear();
+        localStorage.setItem('localProjects', JSON.stringify(projects));
     } else {
         projects[e.target.className].projectCompleted();
         printProject();
+        localStorage.clear();
+        localStorage.setItem('localProjects', JSON.stringify(projects));
     }
   }
 })
@@ -94,5 +101,16 @@ function deleteAllTasks (project) {
         tasks.splice(j,1);
       }
     }
+  }
+}
+
+export function populateProjects() {
+  if (projects.length === 1) {
+    const storedProjects = localStorage.getItem('localProjects');
+    const parsedProjects = JSON.parse(storedProjects);
+    for (let i = 1; i < parsedProjects.length; i++) {
+      addNewProject(parsedProjects[i].title, parsedProjects[i].description, parsedProjects[i].done);
+    }
+    addProjectToSelect('#project');
   }
 }
