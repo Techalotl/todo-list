@@ -7,7 +7,7 @@ const mainContainer = document.querySelector('#main-container');
 
 export function printProject () {
     mainContainer.innerHTML = '';
-    if (localStorage.length === 0 && projects.length === 1) {
+    if (!localStorage.getItem('localProjects') && projects.length === 1) {
         const message = document.createElement('div');
         message.textContent = 'Waiting for new projects...';
         message.style.fontSize = '3rem';

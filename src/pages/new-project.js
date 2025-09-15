@@ -38,9 +38,9 @@ function checkForm () {
     return
   } else {
     addNewProject(projectTitle.value || 'Untitled Project', projectDescription.value, false);
+    localStorage.setItem('localProjects', JSON.stringify(projects));
     printProject();
     addProjectToSelect('#project');
-    localStorage.setItem('localProjects', JSON.stringify(projects));
   }
 }
 
@@ -56,11 +56,13 @@ projects.push(defaultProject);
 mainContainer.addEventListener('click', (e) => {
   if (e.target.classList[0] === 'project-trash-icon') {
     const project = projects[e.target.classList[1]].title;
-    deleteAllTasks(project);
+    deleteTasksInProject(project);
     projects.splice(e.target.classList[1], 1);
+    localStorage.removeItem('localProjects');
+    if (projects.length > 1) {
+      localStorage.setItem('localProjects', JSON.stringify(projects));
+    }
     printProject();
-    localStorage.clear();
-    localStorage.setItem('localProjects', JSON.stringify(projects));
   }
 })
 
@@ -70,12 +72,12 @@ mainContainer.addEventListener('click', (e) => {
     if (e.target.checked) {
         projects[e.target.className].projectCompleted();
         printProject();
-        localStorage.clear();
+        localStorage.removeItem('localProjects');
         localStorage.setItem('localProjects', JSON.stringify(projects));
     } else {
         projects[e.target.className].projectCompleted();
         printProject();
-        localStorage.clear();
+        localStorage.removeItem('localProjects');
         localStorage.setItem('localProjects', JSON.stringify(projects));
     }
   }
@@ -93,7 +95,7 @@ export function tasksPerProject (projectName) {
   return tasksInProject.length;
 }
 
-function deleteAllTasks (project) {
+function deleteTasksInProject (project) {
   //NO SNEAKY TASKS HERE! It's the only way I could think of.
   for (let i = 0; i < tasks.length; i++) {
     for (let j = 0; j < tasks.length; j++) {
