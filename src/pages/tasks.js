@@ -116,7 +116,7 @@ mainContainer.addEventListener('click', (e) => {
     if (e.target.name === 'task-done') {
         if (e.target.checked === true) {
             tasks[e.target.id].taskCompleted();
-            taskDiv.style.backgroundColor = '#264c00';
+            taskDiv.style.backgroundColor = '#26331a';
             taskName.style.color = '#99cc66';
             editIcon.style.display = 'none';
             arrowDown.style.display = 'none';
