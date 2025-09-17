@@ -104,15 +104,15 @@ function deleteTasksInProject (project) {
       }
     }
   }
+  localStorage.removeItem('localTasks');
+  localStorage.setItem('localTasks', JSON.stringify(tasks));
 }
 
 export function populateProjects() {
-  if (projects.length === 1) {
-    const storedProjects = localStorage.getItem('localProjects');
-    const parsedProjects = JSON.parse(storedProjects);
-    for (let i = 1; i < parsedProjects.length; i++) {
-      addNewProject(parsedProjects[i].title, parsedProjects[i].description, parsedProjects[i].done);
-    }
-    addProjectToSelect('#project');
+  const storedProjects = localStorage.getItem('localProjects');
+  const parsedProjects = JSON.parse(storedProjects);
+  for (let i = 1; i < parsedProjects.length; i++) {
+    addNewProject(parsedProjects[i].title, parsedProjects[i].description, parsedProjects[i].done);
   }
+  addProjectToSelect('#project');
 }

@@ -6,9 +6,6 @@ import { printTodayTasks } from './today';
 export const tasks = [];
 const { lightFormat } = require('date-fns');
 export const todayDate = lightFormat(new Date (), 'yyyy-MM-dd');
-const { addDays } = require("date-fns");
-const tomorrowDate = lightFormat(new Date (addDays(new Date (), 1)), 'yyyy-MM-dd');
-const nextWeekDate = lightFormat(new Date (addDays(new Date (), 7)), 'yyyy-MM-dd');
 const mainContainer = document.querySelector('#main-container');
 
 class Task {
@@ -26,10 +23,18 @@ class Task {
   }
 }
 
-const example1 = new Task ('Read email', 'So I can clean my inbox', todayDate, '#3', 'Let us stop procrastinating this, please.', '', false);
-const example2 = new Task ('Take Sparks to the vet', 'What the title says', tomorrowDate, '#1', 'He needs his last vaccine. Also remember to ask about the weird turd he produce.', '', false);
-const example3 = new Task ('Call Simon', 'Need to confirm his assistance', nextWeekDate,'#2', '', '', true);
-tasks.push(example1, example2, example3);
+export function setExampleTasks () {
+  const { addDays } = require("date-fns");
+  const tomorrowDate = lightFormat(new Date (addDays(new Date (), 1)), 'yyyy-MM-dd');
+  const nextWeekDate = lightFormat(new Date (addDays(new Date (), 7)), 'yyyy-MM-dd');
+  const example1 = new Task ('Read email', 'So I can clean my inbox (Example Task)', todayDate, '#3', 'Let us stop procrastinating this, please.', '', false);
+  const example2 = new Task ('Take Sparks to the vet', 'What the title says (Example Task)', tomorrowDate, '#1', 'He needs his last vaccine. Also remember to ask about the weird turd he produce.', '', false);
+  const example3 = new Task ('Call Simon', 'Need to confirm his assistance (Example Task)', nextWeekDate,'#2', '', '', true);
+  const exampleTasks = [];
+  exampleTasks.push(example1, example2, example3);
+  localStorage.setItem('localTasks', JSON.stringify(exampleTasks));
+  populateTasks();
+}
 
 export function openTaskDialog () {
   const taskDialog = document.querySelector('#task-dialog');
@@ -39,7 +44,7 @@ export function openTaskDialog () {
   cancelButton.addEventListener('click', () => {taskDialog.close();});
   confirmButton.addEventListener('click', () => {
     checkTaskForm();
-  })
+  });
 }
 
 function checkTaskForm() {
@@ -54,7 +59,8 @@ function checkTaskForm() {
     taskForm.reset();
   } else {
     addNewTask(taskTitle.value || 'Untitled task', taskDescription.value,
-    taskDate.value || todayDate, taskPriority.value, taskNotes.value, taskProject.value);
+    taskDate.value || todayDate, taskPriority.value, taskNotes.value, taskProject.value, false);
+    localStorage.setItem('localTasks', JSON.stringify(tasks));
     if (taskProject.value === '') {
       printTask();
       taskForm.reset();
@@ -65,8 +71,8 @@ function checkTaskForm() {
   }
 }
 
-function addNewTask (title, description, date, priority, notes, toProject) {
-  const task = new Task (title, description, date, priority, notes, toProject, false);
+function addNewTask (title, description, date, priority, notes, toProject, done) {
+  const task = new Task (title, description, date, priority, notes, toProject, done);
   tasks.push(task);
 }
 
@@ -75,6 +81,10 @@ mainContainer.addEventListener('click', (e) => {
   if (e.target.classList[0] === 'trash-icon') {
     const project = tasks[e.target.classList[1]].toProject;
     tasks.splice(e.target.classList[1], 1);
+    localStorage.removeItem('localTasks');
+    if (tasks.length > 0) {
+      localStorage.setItem('localTasks', JSON.stringify(tasks));
+    }
     printTask(project);
   }
 })
@@ -96,7 +106,6 @@ mainContainer.addEventListener('click', (e) => {
       checkTaskEdits(target);
     }
   }
-  
 })
 
 function fillEditDialog (target) {
@@ -135,10 +144,22 @@ function checkTaskEdits (target) {
       tasks[target].priority = taskPriority.value;
       tasks[target].notes = taskNotes.value;
       tasks[target].toProject = taskProject.value;
+      localStorage.removeItem('localTasks');
+      localStorage.setItem('localTasks', JSON.stringify(tasks));
       if (taskProject.value === '') {
         printTask();
       } else if (taskDate.value === todayDate) {
         printTodayTasks();
       } else { printTask(taskProject.value); }
+  }
+}
+
+export function populateTasks () {
+  const storedTasks = localStorage.getItem('localTasks');
+  const parsedTasks = JSON.parse(storedTasks);
+  for (let i = 0; i < parsedTasks.length; i++) {
+    addNewTask(parsedTasks[i].title, parsedTasks[i].description,
+      parsedTasks[i].date, parsedTasks[i].priority, parsedTasks[i].notes,
+      parsedTasks[i].toProject, parsedTasks[i].done);
   }
 }

@@ -1,5 +1,5 @@
-import { openTaskDialog } from './pages/new-task.js';
-import { openProjectDialog } from './pages/new-project.js';
+import { openTaskDialog, tasks, populateTasks, setExampleTasks } from './pages/new-task.js';
+import { openProjectDialog, populateProjects, projects } from './pages/new-project.js';
 import { printTodayTasks } from './pages/today.js';
 import { printTaskByWeek } from './pages/this-week.js';
 import { printProject } from './pages/projects.js';
@@ -36,4 +36,12 @@ tasksButton.addEventListener('click', () => {
     printTask();
 });
 
+if (localStorage.getItem('localProjects') && projects.length === 1) {
+    populateProjects();
+}
+if (localStorage.getItem('localTasks') && tasks.length === 0) {
+    populateTasks();
+} else if (!localStorage.getItem('localTasks') && tasks.length === 0) {
+    setExampleTasks();
+}
 printTask();

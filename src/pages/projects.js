@@ -14,7 +14,6 @@ export function printProject () {
         message.style.textAlign = 'center';
         mainContainer.appendChild(message);
     } else {
-        populateProjects();
         for (let i = 1; i < projects.length; i++) {
             const projectDiv = document.createElement('div');
             projectDiv.setAttribute('class', 'project-container')
