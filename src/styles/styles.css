@@ -17,8 +17,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #939e01;
-    color: #264c00;
+    background-color: #99cc66;
+    color: #26331a;
     font-family: 'Jersey 10', monospace;
 }
 
@@ -39,19 +39,19 @@ button {
     font-size: 1.2rem;
     padding: 10px;
     margin: 5px;
-    border: 2px solid #264c00;
-    color: #264c00;
-    background-color: #939e01;
+    border: 2px solid #26331a;
+    color: #26331a;
+    background-color: #99cc66;
 }
 
 button:hover {
-    background-color: #264c00;
-    color: #939e01;
+    background-color: #26331a;
+    color: #99cc66;
     cursor: pointer;
 }
 
 #main-container {
-    border: 2px solid #264c00;
+    border: 2px solid #26331a;
     width: 97%;
     padding: 10px;
     display: flex;
@@ -63,9 +63,9 @@ button:hover {
 dialog {
     width: 50%;
     margin: auto;
-    background-color: #939e01;
-    color: #264c00;
-    border: #264c00 2px solid;
+    background-color: #99cc66;
+    color: #26331a;
+    border: #26331a 2px solid;
     padding: 10px;
 }
 
@@ -92,9 +92,9 @@ textarea {
     width: 100%;
     height: initial;
     font-family: monospace;
-    border: #264c00 1px solid;
-    color: #264c00;
-    background-color: #939e01;
+    border: #26331a 1px solid;
+    color: #26331a;
+    background-color: #99cc66;
     padding: 5px;
 }
 

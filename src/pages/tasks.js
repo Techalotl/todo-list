@@ -75,13 +75,13 @@ export function printTask (project = '') {
                 taskDate.textContent = `Due date: ${tasks[i].date}`;
                 taskDivBottom.appendChild(taskDate);
                 if (tasks[i].priority === '#1') {
-                    taskDiv.style.border = '10px solid #264c00';
+                    taskDiv.style.border = '10px solid #26331a';
                     taskName.style.fontSize = '2rem';
                 } else if (tasks[i].priority === '#2') {
-                    taskDiv.style.border = '5px solid #264c00';
+                    taskDiv.style.border = '5px solid #26331a';
                     taskName.style.fontSize = '1.7rem';
                 } else {
-                    taskDiv.style.border = '2px solid #264c00';
+                    taskDiv.style.border = '2px solid #26331a';
                 }
                 const taskNotes = document.createElement('p');
                 taskNotes.setAttribute('class', 'notes');
@@ -94,8 +94,8 @@ export function printTask (project = '') {
                 }
                 if (tasks[i].done === true) {
                     checkTask.checked = true;
-                    taskDiv.style.backgroundColor = '#264c00';
-                    taskName.style.color = '#939e01';
+                    taskDiv.style.backgroundColor = '#26331a';
+                    taskName.style.color = '#99cc66';
                     editIcon.style.display = 'none';
                     arrowDown.style.display = 'none';
                     deleteTaskIcon.src = trash1;
@@ -117,14 +117,14 @@ mainContainer.addEventListener('click', (e) => {
         if (e.target.checked === true) {
             tasks[e.target.id].taskCompleted();
             taskDiv.style.backgroundColor = '#264c00';
-            taskName.style.color = '#939e01';
+            taskName.style.color = '#99cc66';
             editIcon.style.display = 'none';
             arrowDown.style.display = 'none';
             deleteIcon.src = trash1;
         } else {
             tasks[e.target.id].taskCompleted();
-            taskDiv.style.backgroundColor = '#939e01';
-            taskName.style.color = '#264c00';
+            taskDiv.style.backgroundColor = '#99cc66';
+            taskName.style.color = '#26331a';
             editIcon.style.display = 'block';
             arrowDown.style.display = 'block';
             deleteIcon.src = trash;

@@ -55,8 +55,8 @@ export function printProject () {
             projectIcons.appendChild(deleteProjectIcon);
             if (projects[i].done === true) {
                 checkProject.checked = true;
-                projectDiv.style.backgroundColor = '#264c00';
-                projectName.style.color = '#939e01';
+                projectDiv.style.backgroundColor = '#26331a';
+                projectName.style.color = '#99cc66';
                 arrowRight.style.display = 'none';
                 deleteProjectIcon.src = trash1;
             }
