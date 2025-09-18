@@ -74,10 +74,10 @@ export function printTask (project = '') {
                 const taskDate = document.createElement('p');
                 taskDate.textContent = `Due date: ${tasks[i].date}`;
                 taskDivBottom.appendChild(taskDate);
-                if (tasks[i].priority === '#1') {
+                if (tasks[i].priority === 'High') {
                     taskDiv.style.border = '10px solid #26331a';
                     taskName.style.fontSize = '2rem';
-                } else if (tasks[i].priority === '#2') {
+                } else if (tasks[i].priority === 'Medium') {
                     taskDiv.style.border = '5px solid #26331a';
                     taskName.style.fontSize = '1.7rem';
                 } else {

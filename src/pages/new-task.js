@@ -27,9 +27,9 @@ export function setExampleTasks () {
   const { addDays } = require("date-fns");
   const tomorrowDate = lightFormat(new Date (addDays(new Date (), 1)), 'yyyy-MM-dd');
   const nextWeekDate = lightFormat(new Date (addDays(new Date (), 7)), 'yyyy-MM-dd');
-  const example1 = new Task ('Read email', 'So I can clean my inbox (Example Task)', todayDate, '#3', 'Let us stop procrastinating this, please.', '', false);
-  const example2 = new Task ('Take Sparks to the vet', 'What the title says (Example Task)', tomorrowDate, '#1', 'He needs his last vaccine. Also remember to ask about the weird turd he produce.', '', false);
-  const example3 = new Task ('Call Simon', 'Need to confirm his assistance (Example Task)', nextWeekDate,'#2', '', '', true);
+  const example1 = new Task ('Read email', 'So I can clean my inbox (Example Task)', todayDate, 'Low', 'Let us stop procrastinating this, please.', '', false);
+  const example2 = new Task ('Take Sparks to the vet', 'What the title says (Example Task)', tomorrowDate, 'High', 'He needs his last vaccine. Also remember to ask about the weird turd he produce.', '', false);
+  const example3 = new Task ('Call Simon', 'Need to confirm his assistance (Example Task)', nextWeekDate,'Medium', '', '', true);
   const exampleTasks = [];
   exampleTasks.push(example1, example2, example3);
   localStorage.setItem('localTasks', JSON.stringify(exampleTasks));
